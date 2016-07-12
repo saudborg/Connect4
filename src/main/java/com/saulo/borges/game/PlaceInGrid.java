@@ -1,7 +1,11 @@
-package com.saulo.borges;
+package com.saulo.borges.game;
 
-public class PlaceInGrid {
+import java.io.Serializable;
+
+public class PlaceInGrid implements Serializable{
 	
+	private static final long serialVersionUID = 1320225752940569620L;
+
 	public int row;
 	
 	public int col;

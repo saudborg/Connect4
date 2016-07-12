@@ -2,32 +2,44 @@ package com.saulo.borges;
 
 import java.util.Scanner;
 
+import com.saulo.borges.exception.InvalidCollunmExcepetion;
+import com.saulo.borges.exception.PlayerNullExcpetion;
+import com.saulo.borges.exception.SameCoinTypeExcpetion;
+import com.saulo.borges.game.Coin;
+import com.saulo.borges.game.Connect4;
+import com.saulo.borges.game.Connect4Utils;
+import com.saulo.borges.game.GameSettings;
+import com.saulo.borges.model.PlayerModel;
+
 public class Main {
 	private static Scanner sc;
 
-	public static void main(String[] args) throws SameCoinTypeExcpetion {
+	public static void main(String[] args) throws SameCoinTypeExcpetion, PlayerNullExcpetion, InvalidCollunmExcepetion {
 		// consolePlay();
 		randomPlay();
 	}
 
-	private static void consolePlay() throws SameCoinTypeExcpetion {
+	private static void consolePlay() throws SameCoinTypeExcpetion, PlayerNullExcpetion, InvalidCollunmExcepetion {
 		sc = new Scanner(System.in);
 
 		// Criar jogadores
-		Player player1 = new Player("Player 1", Coin.BLUE);
-		Player player2 = new Player("Player 2", Coin.RED);
+		PlayerModel player1 = new PlayerModel("Player 1", Coin.BLUE);
+		player1.setId(1);
+		PlayerModel player2 = new PlayerModel("Player 2", Coin.RED);
+		player2.setId(2);
 
 		// Começar partida com jogadores
-		Game game = new Game();
-		game.connect4(player1, player2);
+		Connect4 game = new Connect4(GameSettings.GAME_ROW, GameSettings.GAME_COL);
+		game.newGame(player1, player2);
+		Connect4Utils utils = new Connect4Utils(game);
 
 		boolean player1Turn = true;
 
-		while (!game.finishedGame) {
+		while (!game.getGame().isFinishedGame()) {
 
 			if (player1Turn) {
 				System.out.println(player1.getCoin().getValue() + " Player 1 Turns: Choose the collunm");
-				game.printCurrentGame();
+				utils.printCurrentGame();
 				Integer play = sc.nextInt();
 				boolean dropCoin = game.dropCoin(play, player1);
 				if (!dropCoin) {
@@ -40,7 +52,7 @@ public class Main {
 
 			else if (!player1Turn) {
 				System.out.println(player2.getCoin().getValue() + " Player 2 Turns: Choose the collunm");
-				game.printCurrentGame();
+				utils.printCurrentGame();
 				Integer play = sc.nextInt();
 				boolean dropCoin = game.dropCoin(play, player2);
 				if (!dropCoin) {
@@ -52,7 +64,7 @@ public class Main {
 			}
 		}
 
-		game.printCurrentGame();
+		utils.printCurrentGame();
 		if (player1Turn) {
 			System.out.println("Player 2 has won");
 		} else {
@@ -60,50 +72,49 @@ public class Main {
 		}
 	}
 
-	private static void randomPlay() throws SameCoinTypeExcpetion {
+	private static void randomPlay() throws SameCoinTypeExcpetion, PlayerNullExcpetion, InvalidCollunmExcepetion {
 
 		// Criar jogadores
-		Player player1 = new Player("player1", Coin.BLUE);
-		Player player2 = new Player("player2", Coin.RED);
+		PlayerModel player1 = new PlayerModel("player1", Coin.BLUE);
+		player1.setId(1);
+		PlayerModel player2 = new PlayerModel("player2", Coin.RED);
+		player2.setId(2);
 
 		// Começar partida com jogadores
 
-		String way = " ";
-		
 		int i = 0;
 
 		while (i < 50) {
 			System.out.println("-------------------------");
 
-			Game game = new Game();
-			game.connect4(player1, player2);
+			Connect4 game = new Connect4(GameSettings.GAME_ROW, GameSettings.GAME_COL);
+			game.newGame(player1, player2);
+			
+			Connect4Utils utils = new Connect4Utils(game);
 
 			boolean player1Turn = true;
 
-			while (!game.finishedGame) {
+			while (!game.getGame().isFinishedGame()) {
 
 				if (player1Turn) {
-					game.randomPlay(player1);
+					utils.randomPlay(player1);
 					player1Turn = false;
 				}
 
 				else if (!player1Turn) {
-					game.randomPlay(player2);
+					utils.randomPlay(player2);
 					player1Turn = true;
 				}
 			}
 
-			way = game.way;
 			i++;
 
-//			if (way.equals("as")) {
-				game.printCurrentGame();
-				if (player1Turn) {
-					System.out.println("Player 2 has won");
-				} else {
-					System.out.println("Player 1 has won");
-				}
-//			}
+			utils.printCurrentGame();
+			if (player1Turn) {
+				System.out.println("Player 2 has won");
+			} else {
+				System.out.println("Player 1 has won");
+			}
 		}
 	}
 }

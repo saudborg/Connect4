@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Realtime Connect4</title>
+</head>
+<body>
+
+	<input type="hidden" id="playerId" th:value="${playerId}" />
+	<input type="hidden" id="game" th:value="${game}" />
+
+	<div
+		style="position: fixed; top: 0; height: 100px; width: 100%; background-color: #ffffff;">
+		<p>
+			PLAYER
+			<spam th:utext="${playerId}"></spam>
+			choose a column:
+		</p>
+
+
+		<!-- 		<textarea id="message"></textarea> -->
+		<input type="button" class="btn" value="0" /> <input type="button"
+			class="btn" value="1" /> <input type="button" class="btn" value="2" />
+		<input type="button" class="btn" value="3" /> <input type="button"
+			class="btn" value="4" /> <input type="button" class="btn" value="5" />
+
+		<!-- 		<button type="button" id="send">Send</button> -->
+	</div>
+	<div style="margin-top: 110px;">
+		<h3>Round:</h3>
+		<ol id="messages"></ol>
+	</div>
+
+
+	<script type="text/javascript"
+		src="//cdn.jsdelivr.net/jquery/1.11.2/jquery.min.js"></script>
+	<script type="text/javascript"
+		src="//cdn.jsdelivr.net/sockjs/0.3.4/sockjs.min.js"></script>
+	<script type="text/javascript"
+		src="//cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+
+	<script th:inline="javascript">
+		$(document).ready(function() {
+			var game = [[${game}]];
+			var playerId = [[${playerId}]];
+			var messageList = $("#messages");
+			
+			var coins = {
+					'SPACE' : '_', 'BLUE' : 'X', 'RED' : 'O'
+			}
+			
+			
+			var getMessageString = function(message) {
+				console.log(message);
+				var table = message['game'];
+				
+				var sOut="<table>";
+				for (y in table){      
+					sOut += "<tr>";
+				    for (x in table[0]) { // for each clm
+				        sOut += "<td>" + coins[table[y][x]] + "</td>";
+				    }
+				    sOut += "</tr>";
+				    
+				}
+				sOut += "</table>";
+				
+				
+				var string = "<li><p>Received: </p><div>" + message.content + "</div></li> <p>" + sOut + "</p>";
+				return string;
+			};
+			var socket = new SockJS('/connect4');
+			var stompClient = Stomp.over(socket);
+            stompClient.connect({ }, function(frame) {
+            	// subscribe to the /topic/entries endpoint which feeds newly added messages
+                stompClient.subscribe('/topic/entries', function(data) {
+                	// when a message is received add it to the end of the list
+                    var body = data.body;
+                    var message = JSON.parse(body);
+                    messageList.append(getMessageString(message));
+                    window.scrollTo(0,document.body.scrollHeight);
+                });
+            });
+            $(".btn").on("click", function() {
+            	// send the message
+				var obj = new Object();
+				obj.col = $(this).val();
+				obj.game  = game.id;
+				obj.player = playerId;
+				var jsonString= JSON.stringify(obj);
+				stompClient.send("/app/connect4", {}, jsonString);
+            });
+		});
+	</script>
+</body>
+</html>

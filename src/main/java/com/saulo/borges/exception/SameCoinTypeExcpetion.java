@@ -1,4 +1,4 @@
-package com.saulo.borges;
+package com.saulo.borges.exception;
 
 public class SameCoinTypeExcpetion extends Exception {
 
