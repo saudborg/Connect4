@@ -52,31 +52,31 @@ playerId	:	ID (this ID you can get in the response when you create a user)
 
 Your result will be like this:
 `
-"id": 1,
-    "game": [
-        [
-            "SPACE","SPACE","SPACE","SPACE","SPACE","SPACE", "SPACE"
+    "id": 1,
+        "game": [
+            [
+                "SPACE","SPACE","SPACE","SPACE","SPACE","SPACE", "SPACE"
+            ],
+            [
+                "SPACE","SPACE","SPACE","SPACE","SPACE","SPACE", "SPACE"
+            ],
+            [
+                "SPACE","SPACE","SPACE","SPACE","SPACE","SPACE", "SPACE"
+            ],
+            [
+                "SPACE","SPACE","SPACE","SPACE","SPACE","SPACE", "SPACE"
+            ],
+            [
+                "SPACE","SPACE","SPACE","SPACE","SPACE","SPACE", "SPACE"
+            ],
+            [
+                "SPACE","SPACE","SPACE","SPACE","SPACE","SPACE", "SPACE"
+            ],
+            [
+                "SPACE","BLUE","SPACE","SPACE","SPACE","SPACE","SPACE"
+            ]
         ],
-        [
-            "SPACE","SPACE","SPACE","SPACE","SPACE","SPACE", "SPACE"
-        ],
-        [
-            "SPACE","SPACE","SPACE","SPACE","SPACE","SPACE", "SPACE"
-        ],
-        [
-            "SPACE","SPACE","SPACE","SPACE","SPACE","SPACE", "SPACE"
-        ],
-        [
-            "SPACE","SPACE","SPACE","SPACE","SPACE","SPACE", "SPACE"
-        ],
-        [
-            "SPACE","SPACE","SPACE","SPACE","SPACE","SPACE", "SPACE"
-        ],
-        [
-            "SPACE","BLUE","SPACE","SPACE","SPACE","SPACE","SPACE"
-        ]
-    ],
-    "result": []
+        "result": []
 `
 
 If there is a winner, also will show a message like this:
