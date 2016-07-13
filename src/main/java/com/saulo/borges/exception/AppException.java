@@ -1,5 +1,10 @@
 package com.saulo.borges.exception;
 
+/**
+ * General exception to handle in the Rest layer
+ * @author sauloborges
+ *
+ */
 public class AppException extends Exception {
 
 	private static final long serialVersionUID = -4454531872952074931L;

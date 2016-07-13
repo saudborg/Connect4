@@ -5,7 +5,7 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.saulo.borges.exception.InvalidCollunmExcepetion;
+import com.saulo.borges.exception.InvalidColumnExcepetion;
 import com.saulo.borges.exception.PlayerNullExcpetion;
 import com.saulo.borges.exception.SameCoinTypeExcpetion;
 import com.saulo.borges.game.Coin;
@@ -26,7 +26,7 @@ public class GameTest {
 	}
 	
 	@Test
-	public void game1() throws SameCoinTypeExcpetion, PlayerNullExcpetion, InvalidCollunmExcepetion{
+	public void gameWonByDiagonalUp() throws SameCoinTypeExcpetion, PlayerNullExcpetion, InvalidColumnExcepetion{
 		Connect4 game = new Connect4();
 		game.newGame(player1, player2);
 		
@@ -71,11 +71,11 @@ public class GameTest {
 	}
 	
 	@Test
-	public void game2() throws SameCoinTypeExcpetion, PlayerNullExcpetion, InvalidCollunmExcepetion{
+	public void gameWonColumn() throws SameCoinTypeExcpetion, PlayerNullExcpetion, InvalidColumnExcepetion{
 		Connect4 game = new Connect4();
 		game.newGame(player1, player2);
 		
-		// Winner will be player 2 by find In Diagonal Up
+		// Winner will be player 2 by find In Column
 		game.dropCoin(4, player1);
 		game.dropCoin(3, player2);
 		game.dropCoin(5, player1);
@@ -100,7 +100,7 @@ public class GameTest {
 	}
 	
 	@Test
-	public void game3() throws SameCoinTypeExcpetion, PlayerNullExcpetion, InvalidCollunmExcepetion{
+	public void gameWithoutWinnerYet() throws SameCoinTypeExcpetion, PlayerNullExcpetion, InvalidColumnExcepetion{
 		Connect4 game = new Connect4();
 		game.newGame(player1, player2);
 		
@@ -121,7 +121,7 @@ public class GameTest {
 	}
 	
 	@Test
-	public void game4() throws SameCoinTypeExcpetion, PlayerNullExcpetion, InvalidCollunmExcepetion{
+	public void gameWonByDiagonalDown() throws SameCoinTypeExcpetion, PlayerNullExcpetion, InvalidColumnExcepetion{
 		Connect4 game = new Connect4();
 		game.newGame(player1, player2);
 		
@@ -157,11 +157,11 @@ public class GameTest {
 	}
 	
 	@Test
-	public void game5() throws SameCoinTypeExcpetion, PlayerNullExcpetion, InvalidCollunmExcepetion{
+	public void gameWonByRow() throws SameCoinTypeExcpetion, PlayerNullExcpetion, InvalidColumnExcepetion{
 		Connect4 game = new Connect4();
 		game.newGame(player1, player2);
 		
-		// Winner will be player 1 by find In Diagonal Down
+		// Winner will be player 1 by find In row
 		game.dropCoin(6, player1);
 		game.dropCoin(1, player2);
 		game.dropCoin(4, player1);
@@ -183,15 +183,14 @@ public class GameTest {
 	}
 	
 	/**
-	 * Cobre o fato de ter uma ultima peca na primeira linha da mesma cor da primeira na segunda linha
+	 * Covers the fact that one last piece in the first row of the same color of the first in the second row
 	 * @throws SameCoinTypeExcpetion
 	 */
 	@Test
-	public void game6() throws SameCoinTypeExcpetion, PlayerNullExcpetion, InvalidCollunmExcepetion{
+	public void gameWithCountInDifferentsRows() throws SameCoinTypeExcpetion, PlayerNullExcpetion, InvalidColumnExcepetion{
 		Connect4 game = new Connect4();
 		game.newGame(player1, player2);
 		
-		// Winner will be player 1 by find In Diagonal Down
 		game.dropCoin(5, player1);
 		game.dropCoin(2, player2);
 		game.dropCoin(0, player1);
@@ -228,7 +227,7 @@ public class GameTest {
 	 * @throws SameCoinTypeExcpetion
 	 */
 	@Test
-	public void game7() throws SameCoinTypeExcpetion, PlayerNullExcpetion, InvalidCollunmExcepetion{
+	public void gameDraw() throws SameCoinTypeExcpetion, PlayerNullExcpetion, InvalidColumnExcepetion{
 		Connect4 game = new Connect4();
 		game.newGame(player1, player2);
 		
@@ -281,15 +280,14 @@ public class GameTest {
 	}
 	
 	/**
-	 * Teste para o caso de estar preenchida uma coluna sendo que tem dois seguidos no topo da coluna
+	 * Test for the case to be filled with a column which has two straight at the top of the column
 	 * @throws SameCoinTypeExcpetion
 	 */
 	@Test
-	public void game8() throws SameCoinTypeExcpetion, PlayerNullExcpetion, InvalidCollunmExcepetion{
+	public void gameCoverTopOfTheColumn() throws SameCoinTypeExcpetion, PlayerNullExcpetion, InvalidColumnExcepetion{
 		Connect4 game = new Connect4();
 		game.newGame(player1, player2);
 		
-		// Winner will be player 1 by find In Diagonal Down
 		game.dropCoin(0, player1);
 		game.dropCoin(0, player2);
 		game.dropCoin(0, player1);
@@ -324,15 +322,14 @@ public class GameTest {
 	}
 	
 	/**
-	 * Ganhar em dois sentidos
+	 * Winning in two ways
 	 * @throws SameCoinTypeExcpetion
 	 */
 	@Test
-	public void game9() throws SameCoinTypeExcpetion, PlayerNullExcpetion, InvalidCollunmExcepetion{
+	public void gameWonInTwoWays() throws SameCoinTypeExcpetion, PlayerNullExcpetion, InvalidColumnExcepetion{
 		Connect4 game = new Connect4();
 		game.newGame(player1, player2);
 		
-		// Winner will be player 1 by find In Diagonal Down
 		game.dropCoin(6, player1);
 		game.dropCoin(5, player2);
 		game.dropCoin(0, player1);
@@ -377,6 +374,4 @@ public class GameTest {
 		
 	}
 
-
-	// TODO: fazer teste com exceçao
 }

@@ -1,6 +1,12 @@
 package com.saulo.borges.game;
 
-//@Entity 
+/**
+ * Represents the coin that the player can put in the game.
+ * 
+ * The Enum space is when the place is empty
+ * @author sauloborges
+ *
+ */
 public enum Coin  {
 	
 	BLUE("Blue", "x"),
@@ -8,6 +14,16 @@ public enum Coin  {
 	RED("Red" , "o"),
 	
 	SPACE("Empty", " ");
+	
+	/**
+	 * Name of the color
+	 */
+	private String color;
+	
+	/**
+	 * Value to show in the game
+	 */
+	private String value;
 	
 	Coin(String color, String value){
 		this.setColor(color);
@@ -29,9 +45,6 @@ public enum Coin  {
 		this.value = value;
 	}
 
-	private String color;
-	private String value;
-	
 	public static Coin findByColor(String color){
 		Coin[] values = Coin.values();
 		for (Coin coin : values) {

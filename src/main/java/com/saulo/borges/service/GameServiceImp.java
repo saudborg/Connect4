@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import com.saulo.borges.controller.form.GameCreateForm;
 import com.saulo.borges.controller.form.MoveForm;
 import com.saulo.borges.exception.AppException;
-import com.saulo.borges.exception.InvalidCollunmExcepetion;
+import com.saulo.borges.exception.InvalidColumnExcepetion;
 import com.saulo.borges.exception.PlayerNullExcpetion;
 import com.saulo.borges.exception.SameCoinTypeExcpetion;
 import com.saulo.borges.game.Connect4;
@@ -39,10 +39,9 @@ public class GameServiceImp implements GameService {
 	}
 
 	public void dropACoin(MoveForm form, GameModel game, Connect4 connect4) throws AppException {
-		if (game.getPlayer1().getId().intValue() != form.getPlayerId().intValue() || game.getPlayer2().getId().intValue() != form.getPlayerId().intValue()) {
+		if (game.getPlayer1().getId().intValue() != form.getPlayerId().intValue() && game.getPlayer2().getId().intValue() != form.getPlayerId().intValue()) {
 			throw new AppException(Response.Status.BAD_REQUEST.getStatusCode(), 400,
 					"This player is not playing this game");
-//			throw new PlayerNotAllowedToPlay();
 		}
 
 		if (game.getPlayerTurn().getId().intValue() != form.getPlayerId().intValue()) {
@@ -53,7 +52,7 @@ public class GameServiceImp implements GameService {
 		int collumn = form.getCol();
 		try {
 			connect4.dropCoin(collumn, player);
-		} catch (InvalidCollunmExcepetion e) {
+		} catch (InvalidColumnExcepetion e) {
 			throw new AppException(Response.Status.BAD_REQUEST.getStatusCode(), 400, e.getMessage());
 		}
 

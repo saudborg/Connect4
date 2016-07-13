@@ -2,7 +2,7 @@ package com.saulo.borges.game;
 
 import java.util.Random;
 
-import com.saulo.borges.exception.InvalidCollunmExcepetion;
+import com.saulo.borges.exception.InvalidColumnExcepetion;
 import com.saulo.borges.model.GameModel;
 import com.saulo.borges.model.PlayerModel;
 
@@ -16,6 +16,17 @@ public class Connect4Utils {
 		this.game = connect4.getGame();
 	}
 
+	/**
+	 * Print the current status of the game. Like this
+	 *   |   |   |   |   |   |   | 0
+	 *   |   |   |   |   |   |   | 1
+	 *   |   | x | X |   |   |   | 2
+	 *   |   | X | o |   |   |   | 3
+	 * o | X | x | o |   |   | o | 4
+	 * X | o | o | o | x |   | x | 5
+	 * ___________________________
+	 * 0 | 1 | 2 | 3 | 4 | 5 | 6 |
+	 */
 	public void printCurrentGame() {
 		System.out.println();
 		for (int i = 0; i < game.getGame().length; i++) {
@@ -40,14 +51,24 @@ public class Connect4Utils {
 		System.out.println("0 | 1 | 2 | 3 | 4 | 5 | 6 |");
 	}
 
-	public boolean randomPlay(PlayerModel player) throws InvalidCollunmExcepetion {
+	/**
+	 * Make a random play. Use the class Random to get a number of one column
+	 * @param player
+	 * @return
+	 * @throws InvalidColumnExcepetion
+	 */
+	public boolean randomPlay(PlayerModel player) throws InvalidColumnExcepetion {
 		Random r = new Random();
 
 		int col = 0;
 		boolean dropCoin = false;
 		while (!dropCoin) {
 			col = r.nextInt(7);
+			try {
 			dropCoin = connect4.dropCoin(col, player);
+			} catch (InvalidColumnExcepetion e){
+				dropCoin = false;
+			}
 		}
 		System.out.println("game.dropCoin(" + col + ", " + player.getName() + ");");
 

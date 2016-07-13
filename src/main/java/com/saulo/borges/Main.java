@@ -2,7 +2,7 @@ package com.saulo.borges;
 
 import java.util.Scanner;
 
-import com.saulo.borges.exception.InvalidCollunmExcepetion;
+import com.saulo.borges.exception.InvalidColumnExcepetion;
 import com.saulo.borges.exception.PlayerNullExcpetion;
 import com.saulo.borges.exception.SameCoinTypeExcpetion;
 import com.saulo.borges.game.Coin;
@@ -11,24 +11,29 @@ import com.saulo.borges.game.Connect4Utils;
 import com.saulo.borges.game.GameSettings;
 import com.saulo.borges.model.PlayerModel;
 
+/**
+ * This class used just for tests.
+ * 
+ * You can run and play at console or create a list of random games to see the game working.
+ * @author sauloborges
+ *
+ */
 public class Main {
 	private static Scanner sc;
 
-	public static void main(String[] args) throws SameCoinTypeExcpetion, PlayerNullExcpetion, InvalidCollunmExcepetion {
+	public static void main(String[] args) throws SameCoinTypeExcpetion, PlayerNullExcpetion, InvalidColumnExcepetion {
 		// consolePlay();
 		randomPlay();
 	}
 
-	private static void consolePlay() throws SameCoinTypeExcpetion, PlayerNullExcpetion, InvalidCollunmExcepetion {
+	private static void consolePlay() throws SameCoinTypeExcpetion, PlayerNullExcpetion, InvalidColumnExcepetion {
 		sc = new Scanner(System.in);
 
-		// Criar jogadores
 		PlayerModel player1 = new PlayerModel("Player 1", Coin.BLUE);
 		player1.setId(1);
 		PlayerModel player2 = new PlayerModel("Player 2", Coin.RED);
 		player2.setId(2);
 
-		// Começar partida com jogadores
 		Connect4 game = new Connect4(GameSettings.GAME_ROW, GameSettings.GAME_COL);
 		game.newGame(player1, player2);
 		Connect4Utils utils = new Connect4Utils(game);
@@ -72,15 +77,18 @@ public class Main {
 		}
 	}
 
-	private static void randomPlay() throws SameCoinTypeExcpetion, PlayerNullExcpetion, InvalidCollunmExcepetion {
+	/**
+	 * This method was created to help me in create unit tests
+	 * @throws SameCoinTypeExcpetion
+	 * @throws PlayerNullExcpetion
+	 * @throws InvalidColumnExcepetion
+	 */
+	private static void randomPlay() throws SameCoinTypeExcpetion, PlayerNullExcpetion, InvalidColumnExcepetion {
 
-		// Criar jogadores
 		PlayerModel player1 = new PlayerModel("player1", Coin.BLUE);
 		player1.setId(1);
 		PlayerModel player2 = new PlayerModel("player2", Coin.RED);
 		player2.setId(2);
-
-		// Começar partida com jogadores
 
 		int i = 0;
 

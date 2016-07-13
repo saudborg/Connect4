@@ -14,6 +14,13 @@ import javax.persistence.Transient;
 import com.saulo.borges.game.Coin;
 import com.saulo.borges.game.PlaceInGrid;
 
+/**
+ * This class stores in the database the status of the game, its players, if the
+ * game is finished and the who is the next turn
+ * 
+ * @author sauloborges
+ *
+ */
 @Entity
 public class GameModel implements Serializable {
 
@@ -41,13 +48,13 @@ public class GameModel implements Serializable {
 	private List<PlaceInGrid> result;
 
 	private int totalCoinsInGrid = 0;
-	
+
 	@Lob
 	@Column(length = 10000)
 	private PlayerModel playerTurn;
-	
-	public GameModel(Coin[][] game, PlayerModel player1, PlayerModel player2, boolean finishedGame, List<PlaceInGrid> result,
-			int totalCoinsInGrid, PlayerModel playerTurn) {
+
+	public GameModel(Coin[][] game, PlayerModel player1, PlayerModel player2, boolean finishedGame,
+			List<PlaceInGrid> result, int totalCoinsInGrid, PlayerModel playerTurn) {
 		super();
 		this.game = game;
 		this.player1 = player1;

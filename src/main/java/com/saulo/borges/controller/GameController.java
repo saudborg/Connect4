@@ -19,6 +19,11 @@ import com.saulo.borges.game.Connect4;
 import com.saulo.borges.model.GameModel;
 import com.saulo.borges.service.GameService;
 
+/**
+ * This class represents the endpoints to play / create a game using REST
+ * @author sauloborges
+ *
+ */
 @RestController
 public class GameController {
 
@@ -27,6 +32,13 @@ public class GameController {
 
 	private Gson gson = new Gson();
 
+	/**
+	 * This method is responsible to create a new game.
+	 * Expects 2 parameters, the ID of player 1 and the ID of player 2
+	 * @param form
+	 * @return
+	 * @throws AppException
+	 */
 	@RequestMapping(value = "/createGame", method = RequestMethod.POST, produces = {
 			MediaType.APPLICATION_JSON_VALUE }, consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.ALL_VALUE })
 	public Response newGame(@ModelAttribute GameCreateForm form) throws AppException {
@@ -38,6 +50,12 @@ public class GameController {
 				.build();
 	}
 
+	/**
+	 * This method is responsible to play one round
+	 * Expects in the URL the ID of the game and the parameters are the playerID and also which column the player choose
+	 * @param form
+	 * @return
+	 */
 	@RequestMapping(value = "/game/{game_id}/play", method = RequestMethod.POST, produces = {
 			MediaType.APPLICATION_JSON_VALUE }, consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.ALL_VALUE })
 	public String playGame(@ModelAttribute MoveForm form, @PathVariable("game_id") String gameIdStr)
@@ -64,6 +82,12 @@ public class GameController {
 		return gson.toJson(json);
 	}
 
+	/**
+	 * This method only return the current status on the game
+	 * @param gameIdStr
+	 * @return
+	 * @throws AppException
+	 */
 	@RequestMapping(value = "/game/{game_id}/status", method = RequestMethod.GET, produces = {
 			MediaType.APPLICATION_JSON_VALUE })
 	public String showGame(@PathVariable("game_id") String gameIdStr) throws AppException {

@@ -17,12 +17,23 @@ import com.saulo.borges.game.Coin;
 import com.saulo.borges.model.PlayerModel;
 import com.saulo.borges.service.PlayerService;
 
+/**
+ * This is a RestController which is responsible to manege a player
+ * @author sauloborges
+ *
+ */
 @RestController
 public class PlayerController {
 
 	@Autowired
 	private PlayerService playerService;
 
+	/**
+	 * This method is responsible to create a new player
+	 * Expects in the parameters, the name and also the color of the coin. Could be Blue or Red
+	 * @param form
+	 * @return
+	 */
 	@RequestMapping(value = "/newPlayer", method = RequestMethod.POST, produces = {
 			MediaType.APPLICATION_JSON_VALUE }, consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.ALL_VALUE })
 	public Response newPlayer(@ModelAttribute PlayerForm form) throws AppException {
@@ -39,6 +50,15 @@ public class PlayerController {
 				.entity("A new player has been inserted: id=[" + model.getId() + "]").build();
 	}
 
+	/**
+	 * This method you can change the color of your player before the game starts.
+	 * 
+	 * It is necessary if two players are going to play and have the same type of coin
+	 * @param playerId
+	 * @param color
+	 * @return
+	 * @throws AppException
+	 */
 	@RequestMapping(value = "/player/{player_id}/changeColor", method = RequestMethod.POST, produces = {
 			MediaType.APPLICATION_JSON_VALUE }, consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.ALL_VALUE })
 	public Response changeColor(@PathVariable("player_id") Integer playerId,  String color)
@@ -60,14 +80,4 @@ public class PlayerController {
 				.build();
 	}
 	
-//	@RequestMapping(value = "/player/{name}", method = RequestMethod.GET, produces = {
-//			MediaType.APPLICATION_JSON_VALUE }, consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.ALL_VALUE })
-//	public String findByName(@PathVariable("name") String name) throws AppException {
-//
-//		FacebookUserEntity entity = facebookService.findById(userId);
-//		FacebookUserJson json = new FacebookUserJson(entity);
-//
-//		return gson.toJson(json);
-//	}
-
 }

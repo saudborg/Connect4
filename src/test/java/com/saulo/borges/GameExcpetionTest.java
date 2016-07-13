@@ -3,7 +3,7 @@ package com.saulo.borges;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.saulo.borges.exception.InvalidCollunmExcepetion;
+import com.saulo.borges.exception.InvalidColumnExcepetion;
 import com.saulo.borges.exception.PlayerNullExcpetion;
 import com.saulo.borges.exception.SameCoinTypeExcpetion;
 import com.saulo.borges.game.Coin;
@@ -24,21 +24,21 @@ public class GameExcpetionTest {
 	}
 	
 	@Test(expected = SameCoinTypeExcpetion.class)
-	public void gameSameCoinType() throws SameCoinTypeExcpetion, PlayerNullExcpetion, InvalidCollunmExcepetion{
+	public void gameSameCoinType() throws SameCoinTypeExcpetion, PlayerNullExcpetion, InvalidColumnExcepetion{
 		player2 = new PlayerModel("player2", Coin.BLUE);
 		Connect4 game = new Connect4();
 		game.newGame(player1, player2);
 	}
 	
 	@Test(expected = PlayerNullExcpetion.class)
-	public void gamePlayerNull() throws SameCoinTypeExcpetion, PlayerNullExcpetion, InvalidCollunmExcepetion{
+	public void gamePlayerNull() throws SameCoinTypeExcpetion, PlayerNullExcpetion, InvalidColumnExcepetion{
 		player2 = null;
 		Connect4 game = new Connect4();
 		game.newGame(player1, player2);
 	}
 	
-	@Test(expected = InvalidCollunmExcepetion.class)
-	public void gameInvalidCol() throws SameCoinTypeExcpetion, PlayerNullExcpetion, InvalidCollunmExcepetion{
+	@Test(expected = InvalidColumnExcepetion.class)
+	public void gameInvalidCol() throws SameCoinTypeExcpetion, PlayerNullExcpetion, InvalidColumnExcepetion{
 		Connect4 game = new Connect4();
 		game.newGame(player1, player2);
 		

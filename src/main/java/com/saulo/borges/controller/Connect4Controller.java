@@ -47,10 +47,6 @@ public class Connect4Controller {
 
 		GameModel game = gameService.findGameById(gameId);
 		
-		if (game.getPlayer1().getId().intValue() != Integer.parseInt(playerId) || game.getPlayer2().getId().intValue() != Integer.parseInt(playerId)) {
-			return "error";
-		}
-
 		Connect4 connect4 = new Connect4(game);
 		connect4.hasAWinner();
 

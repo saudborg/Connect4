@@ -2,6 +2,13 @@ package com.saulo.borges.game;
 
 import java.io.Serializable;
 
+/**
+ * This class represents one place in the grid (array[][]).
+ * 
+ * The class was created to help when show the results of the winner
+ * @author sauloborges
+ *
+ */
 public class PlaceInGrid implements Serializable{
 	
 	private static final long serialVersionUID = 1320225752940569620L;
