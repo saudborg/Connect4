@@ -51,7 +51,7 @@ col 		:	integer	(Reference on the column you would like to play. By default 0 to
 playerId	:	ID (this ID you can get in the response when you create a user)
 
 Your result will be like this:
-`
+
     "id": 1,
         "game": [
             [
@@ -77,7 +77,7 @@ Your result will be like this:
             ]
         ],
         "result": []
-`
+
 
 If there is a winner, also will show a message like this:
 
@@ -103,7 +103,7 @@ If there is a winner, also will show a message like this:
 
 If there is an error, like not your turn or invalid column, a message like this will show up
 
-`
+
     {
         "timestamp": 1468411182421,
         "status": 500,
@@ -112,7 +112,7 @@ If there is an error, like not your turn or invalid column, a message like this 
         "message": "It is not your turn to play",
         "path": "/game/1/play"
     }
-`
+
 
 - You also can check the current status of the game using:
 (GET) http://localhost:8080/game/{game_id}/status
